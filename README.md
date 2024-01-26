@@ -1,2 +1,2 @@
 # install-doxygen-windows-action
-Github action for installing Doxygen from source under windows
+Github action for installing Doxygen under windows
