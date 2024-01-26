@@ -1,0 +1,26 @@
+name: install-doxygen-windows-action
+description: "Install Doxygen under windows runners."
+author: 'Fabien Ors'
+
+inputs:
+  doxygen-root:
+    description: 'Doxygen installation directory'
+  doxygen-version:
+    description: 'Doxygen version to be installed'
+    default: "1.9.8"
+  
+runs:
+  using: "composite"
+  steps:
+
+  - name : Download and install Doxygen
+    shell: powershell
+    run: |
+      $DOXYGEN_URL="https://www.doxygen.nl/files/doxygen-${{inputs.doxygen-version}}.windows.x64.bin.zip"
+      mkdir ${{inputs.doxygen-root}}
+      cd ${{inputs.doxygen-root}}
+      mkdir bin
+      cd ..
+      Invoke-WebRequest -Uri "$DOXYGEN_URL" -OutFile ${{inputs.doxygen-root}}/download.zip
+      7z -o${{inputs.doxygen-root}}/bin x ${{inputs.doxygen-root}}/download.zip
+
